@@ -1,6 +1,6 @@
 describe('Basic user flow for SPA ', () => {
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500');
+    await page.goto('http://127.0.0.1:5501'); //CHANGE THIS BACK TO 5500 LATER 
     await page.waitForTimeout(500);
   });
 
@@ -30,11 +30,15 @@ describe('Basic user flow for SPA ', () => {
   it('Test3: Clicking first <journal-entry>, new URL should contain /#entry1', async () => {
     // implement test3: Clicking on the first journal entry should update the URL to contain “/#entry1”
 
+    const entry1 = page.$$eval('journal-entry', (entries) => {
+      entries[0].click();
+      expect(page.url()).toBe("./#entry1");
+    }).catch(/* not necessary? */);
   });
 
   it('Test4: On first Entry page - checking page header title', async () => {
     // implement test4: Clicking on the first journal entry should update the header text to “Entry 1” 
-
+    
   });
 
   it('Test5: On first Entry page - checking <entry-page> contents', async () => {
