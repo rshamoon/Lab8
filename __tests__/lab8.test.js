@@ -29,16 +29,17 @@ describe('Basic user flow for SPA ', () => {
 
   it('Test3: Clicking first <journal-entry>, new URL should contain /#entry1', async () => {
     // implement test3: Clicking on the first journal entry should update the URL to contain “/#entry1”
+    
+    await page.click('journal-entry');
+    expect(page.url().includes('/#entry1')).toBe(true);
 
-    const entry1 = page.$$eval('journal-entry', (entries) => {
-      entries[0].click();
-      expect(page.url()).toBe("./#entry1");
-    }).catch(/* not necessary? */);
   });
 
   it('Test4: On first Entry page - checking page header title', async () => {
     // implement test4: Clicking on the first journal entry should update the header text to “Entry 1” 
-    
+    //await page.$$('h1');
+    const header = await page.$eval('body > header > h1', el => el.textContent);
+    expect(header).toBe('Entry 1');
   });
 
   it('Test5: On first Entry page - checking <entry-page> contents', async () => {
@@ -54,17 +55,19 @@ describe('Basic user flow for SPA ', () => {
           }
         }
       */
-
+    
   }, 10000);
 
   it('Test6: On first Entry page - checking <body> element classes', async () => {
     // implement test6: Clicking on the first journal entry should update the class attribute of <body> to ‘single-entry’
+    const className = await page.$eval('body', el => el.className);
+    expect(className).toBe('single-entry');
 
   });
 
   it('Test7: Clicking the settings icon, new URL should contain #settings', async () => {
     // implement test7: Clicking on the settings icon should update the URL to contain “/#settings”
-
+    
   });
 
   it('Test8: On Settings page - checking page header title', async () => {
